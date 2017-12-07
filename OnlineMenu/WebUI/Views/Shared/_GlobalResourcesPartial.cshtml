@@ -1,0 +1,15 @@
+﻿@using WebUI.Helpers;
+@{ 
+    var globalRes = ViewsHelper.GetGlobalResources();
+}
+
+<script type="text/javascript">
+    var res = {};
+
+    @foreach (var key in globalRes.Keys)
+    {
+       @:res["@key"] = "@globalRes[key]";
+    }
+
+    window.GlobalResources = res;
+</script>

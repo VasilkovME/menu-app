@@ -1,0 +1,10 @@
+﻿Page {{pagination.getPage()}} of {{pagesCount}}
+<div class="table-pages">
+    <span class="previous-page-button-container">
+        <button type="button" ng-click="pagination.previousPage()" ng-if="showPrevious" class="page-button"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
+    </span>
+
+    <button ng-repeat="page in pages" ng-class="{ 'active-page': page == currentPage }" class="page-button" ng-click="pagination.seek(page)">{{page}}</button>
+
+    <button type="button" ng-click="pagination.nextPage()" ng-if="showNext" class="page-button"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+</div>

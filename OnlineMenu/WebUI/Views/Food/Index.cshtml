@@ -1,0 +1,97 @@
+﻿@using GlobalResources = Resources.UI.Global;
+@using Resources = Resources.UI.Food.Index;
+@using Domain.Entities;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.AngularApp = "FoodApp";
+}
+
+<div class="food-container">
+    <h2>@GlobalResources.Food</h2>
+    <div>
+        <div ng-controller="foodController" class="row">
+            <toaster-container toaster-options="{'close-button':false, 'time-out':3000 }"></toaster-container>
+            <div class="food-table col-md-8">
+
+                <grid-ui-custom-pages pagination="gridApi.pagination"></grid-ui-custom-pages>
+
+                <div class="grid" ui-grid="gridOptions" ui-grid-pagination ui-grid-expandable>
+
+                </div>
+                <div ng-show="loading">
+                    <h3>@GlobalResources.Loading</h3>
+                </div>
+            </div>
+
+
+            <div class="new-food col-md-4">
+                <create-edit-food-form food="newFood" resources="newFoodResources" block-ui-id="newFoodBlockId" food-types-options="foodTypes" heading="@Resources.CreateFood" click-call-back="createFood(newFood)"></create-edit-food-form>
+            </div>
+
+            <script type="text/ng-template" id="tmpl">
+
+                <div class="expanded-food">
+                    <uib-tabset active="activeTabIndex">
+                        <uib-tab index="0" select="loadIngredients()">
+                            <uib-tab-heading>
+                                <i class="fa fa-info-circle" aria-hidden="true"></i> @Resources.GeneralInfoTabName
+                            </uib-tab-heading>
+                            <create-edit-food-form food="foodToEdit" resources="editFoodResources" block-ui-id="editFoodBlockId" food-types-options="foodTypes" heading="@Resources.EditFood" click-call-back="editFood(foodToEdit)"></create-edit-food-form>
+                        
+                        </uib-tab>
+                        <uib-tab index="1" select="loadFoodIngredients(row.entity.FoodId)">
+                            <uib-tab-heading>
+                                <i class="fa fa-shopping-basket" aria-hidden="true"></i> @Resources.IngredientsTabName
+                            </uib-tab-heading>
+                            <div class="food-ingredients-tab">
+                                <div class="new-food-ingredient row">
+                                    <div class="col-md-4">
+                                        <input type="text"
+                                               ng-model="newFoodIngredient.ingredient"
+                                               placeholder="ingredients loaded via $http"
+                                               uib-typeahead="ingr as ingr.Name for ingr in searchIngredients($viewValue)"
+                                               typeahead-loading="loadingIngredients"
+                                               typeahead-no-results="noIngredientsFound"
+                                               class="form-control">
+                                        <i ng-show="loadingIngredients" class="glyphicon glyphicon-refresh"></i>
+                                        <div ng-show="noIngredientsFound">
+                                            <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-control" ng-model="newFoodIngredient.unitOfMeasure">
+                                            <option value="0">kg</option>
+                                            <option value="1">liter</option>
+                                            <option value="2">gr</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input ng-model="newFoodIngredient.amount" type="number" class="form-control" placeholder="@Resources.Amount">
+                                    </div>
+                                    <div class="col-md-1 add-food-ingredient-button">
+                                        <i class="fa fa-plus-square-o add-food-ingredient-button" aria-hidden="true" ng-click="addIngredient()"></i>
+                                    </div>
+                                    
+                                </div>
+
+                                
+                                <grid-ui-custom-pages pagination="pagination"></grid-ui-custom-pages>
+                                <div class="food-ingredients-table" ui-grid="ingredientsGridOptions" ui-grid-pagination>
+
+                                </div>
+                            </div>
+
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+
+            </script>
+
+        </div>
+    </div>
+</div>
+
+
+

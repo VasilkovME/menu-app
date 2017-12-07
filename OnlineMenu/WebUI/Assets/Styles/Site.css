@@ -1,0 +1,77 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.grid {
+    min-height: 500px;
+}
+
+.ingredients-container {
+    margin-top: 60px; 
+}
+
+.expand-control-container {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.expand-control-container > .expand-control {   
+    font-size: 20px;
+}
+
+.expand-control-container > .expand-control.fa-chevron-down {   
+    color: lightblue;
+}
+
+.expand-control-container > .fa-chevron-left {
+    color: darkgray;
+}
+
+.language-control {
+    padding: 3px;
+    font-size: 14px;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+.food-ingredients-tab {
+    padding: 5px 10px;
+}
+
+.add-food-ingredient-button {
+    font-size: 30px;
+    color: gray;
+}
+
+.create-edit-btn:hover {
+    
+}
+
+.active-page {
+    background-color: dodgerblue;
+    color: white;
+}
+
+.page-button {
+    margin-left: 2px;
+    border-radius: 3px;
+    border: none;
+}
+
+.previous-page-button-container {
+    display: inline-block;
+    min-width: 22px;
+}

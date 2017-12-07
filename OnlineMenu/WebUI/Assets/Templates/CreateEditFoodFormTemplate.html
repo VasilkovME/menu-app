@@ -1,0 +1,21 @@
+﻿<div class="panel panel-info" block-ui="{{blockUiId}}">
+    <div class="panel-heading">
+        <h4>{{heading}}</h4>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="newFoodName">{{resources.foodName}}</label>
+            <input type="text" class="form-control" id="newFoodName" ng-model="food.Name" placeholder="{{resources.placeholder}}">
+        </div>
+        <div class="form-group">
+            <label for="newFoodType">{{resources.foodType}}</label>
+            <select class="form-control" 
+                    ng-model="food.FoodType" 
+                    ng-options="option.value as option.name for option in foodTypesOptions">
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="button" class="btn btn-success create-edit-btn" ng-disabled="saveButtonDisabled" value="{{resources.buttonLabel}}" ng-click="clickCallBack()" />
+        </div>
+    </div>
+</div>

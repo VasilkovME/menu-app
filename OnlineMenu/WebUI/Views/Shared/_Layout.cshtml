@@ -1,0 +1,87 @@
+﻿@using Resources.UI;
+@using WebUI.Helpers;
+@{
+    var cultureName = System.Globalization.CultureInfo.CurrentUICulture.Name;
+    var availableCultures = (ViewBag.AvailableCultures as IEnumerable<System.Globalization.CultureInfo>).Select(c => c.Name);
+    var culturesJson = ViewsHelper.AvailableLanguagesJson();
+ }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    
+    <link href="~/Assets/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/Styles/third-party/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/Styles/third-party/ui-grid.css" rel="stylesheet" />
+    <link href="~/Assets/Styles/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Assets/Styles/toaster.css" rel="stylesheet" />
+    <link href="~/Assets/Styles/third-party/angular-block-ui.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="~/Assets/food.png" />
+    @Html.Partial("_GlobalResourcesPartial")
+
+    <script src="~/Assets/Scripts/third-party/modernizr-2.6.2.js"></script>
+    <script src="~/Assets/Scripts/third-party/Angular/angular.min.js"></script>
+    <script src="~/Assets/Scripts/third-party/Angular/angular-sanitize.min.js"></script>
+    <script src="~/Assets/Scripts/third-party/Angular/angular-touch.min.js"></script>
+    <script src="~/Assets/Scripts/third-party/Angular/angular-animate.min.js"></script>
+
+    <script src="~/Assets/Scripts/third-party/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="~/Assets/Scripts/third-party/ui-grid.js"></script>
+    <script src="~/Assets/Scripts/third-party/toaster.js"></script>
+    <script src="~/Assets/Scripts/third-party/angular-block-ui.min.js"></script>
+
+    <script src="~/Assets/Scripts/Application/Language/LanguageController.js"></script>
+
+    <script src="~/Assets/Scripts/Application/Common/CommonModule.js"></script>
+    <script src="~/Assets/Scripts/Application/Common/GridUiCustomPagesDerecrive.js"></script>
+
+    <script src="~/Assets/Scripts/Application/Ingredient/IngredientModule.js"></script>
+    <script src="~/Assets/Scripts/Application/Ingredient/IngredientService.js"></script>
+    <script src="~/Assets/Scripts/Application/Ingredient/IngredientController.js"></script>
+
+    <script src="~/Assets/Scripts/Application/Food/FoodModule.js"></script>
+    <script src="~/Assets/Scripts/Application/Food/FoodService.js"></script>
+    
+    <script src="~/Assets/Scripts/Application/Food/FoodController.js"></script>
+    <script src="~/Assets/Scripts/Application/Food/CreateEditFoodDirective.js"></script>
+
+</head>
+<body ng-app="@ViewBag.AngularApp" >   
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>               
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @foreach (var item in ViewsHelper.GetNavBarItems())
+                    {
+                        <li class='@(item.IsActive?"active":string.Empty)'>@Html.ActionLink(item.Title, item.Action, item.Controller)</li>
+                    }
+                </ul>
+                
+                <div ng-controller="languageController" ng-init="init(@(culturesJson))" class="pull-right">
+                    <language-select current-language="@cultureName" available-languages="availableLanguages"></language-select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year</p>
+        </footer>
+    </div>
+
+    <script src="~/Assets/Scripts/third-party/jquery/jquery-1.10.2.min.js"></script>
+    <script src="~/Assets/Scripts/third-party/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+﻿angular.module("IngredientApp", ['ngTouch', 'ui.grid', 'ui.grid.pagination', 'ui.grid.expandable', 'languageApp', 'commonModule']);

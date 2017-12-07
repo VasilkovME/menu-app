@@ -1,0 +1,16 @@
+﻿<div class="panel panel-default">
+
+    <div class="panel-heading">
+        {{::Resources.ingredient}} (#{{ingredientToEdit.IngredientId}})
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="ingredientToEdit.Name"/>
+        </div>
+        <div class="form-group">
+            <input type="button" class="btn btn-success" value="{{::Resources.save}}" ng-click="Save(ingredientToEdit,row)"/>
+            <input type="button" class="btn btn-default" value="{{::Resources.cancel}}" ng-click="CollapseRow(row)"/>
+            <input type="button" class="btn btn-danger pull-right" value="{{::Resources.remove}}" ng-click="Delete(row)" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@using GlobalResources = Resources.UI.Global;
+@using Resources = Resources.UI.Ingredient.Index;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.AngularApp = "IngredientApp";
+}
+
+<div class="ingredients-container">
+    <h2>@GlobalResources.Ingredients</h2>
+    <div>
+        <div ng-controller="ingredientController" class="row">
+
+            <div class="ingredients-table col-md-8">
+                <grid-ui-custom-pages pagination="gridApi.pagination"></grid-ui-custom-pages>
+                <div class="grid" ui-grid="gridOptions" ui-grid-pagination ui-grid-expandable>
+
+                </div>
+                <div ng-show="loading">
+                    <h3>@GlobalResources.Loading</h3>
+                </div>
+            </div>
+
+
+            <div class="new-ingredient col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4>@Resources.CreateIngredient</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="newIngredientName">@Resources.IngredientName</label>
+                            <input type="text" class="form-control" id="newIngredientName" ng-model="newIngredient.Name" placeholder="@Resources.CreateIngredientPlaceHolder">
+                        </div>
+                        <div class="form-group">
+                            <input type="button" class="form-control" value="@GlobalResources.Create" ng-click="createIngredient(newIngredient)" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
